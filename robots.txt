@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Prévia privada: remova o bloqueio e troque o domínio somente na publicação oficial.
