@@ -43,7 +43,10 @@
       if (rect.top < innerHeight * 1.08 && rect.bottom > -24) item.classList.add('visible');
     });
     addEventListener('hashchange', () => requestAnimationFrame(revealVisibleNow));
-    addEventListener('load', () => requestAnimationFrame(revealVisibleNow), { once: true });
+    addEventListener('load', () => {
+      requestAnimationFrame(revealVisibleNow);
+      setTimeout(revealVisibleNow, 180);
+    }, { once: true });
   } else {
     items.forEach(item => item.classList.add('visible'));
   }
