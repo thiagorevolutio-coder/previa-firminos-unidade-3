@@ -14,6 +14,7 @@
   }
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const compactMotion = matchMedia('(max-width: 760px)').matches;
   const items = [...document.querySelectorAll('.reveal')];
   items.forEach((item, index) => {
     item.classList.add('motion-ready');
@@ -29,6 +30,7 @@
     }
   });
 
+  let revealVisibleNow = () => {};
   if (!reduced && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -36,7 +38,7 @@
       observer.unobserve(entry.target);
     }), { threshold: .12, rootMargin: '0px 0px -38px' });
     items.forEach(item => observer.observe(item));
-    const revealVisibleNow = () => items.forEach(item => {
+    revealVisibleNow = () => items.forEach(item => {
       const rect = item.getBoundingClientRect();
       if (rect.top < innerHeight * 1.08 && rect.bottom > -24) item.classList.add('visible');
     });
@@ -52,7 +54,7 @@
   document.body.prepend(progress);
 
   const topbar = document.querySelector('.topbar');
-  const parallaxItems = reduced ? [] : [
+  const parallaxItems = reduced || compactMotion ? [] : [
     [document.querySelector('.hero-orbit'), .055, 38],
     [document.querySelector('.photo-frame img'), .028, 18],
     [document.querySelector('.story-photo img'), .024, 16],
@@ -64,6 +66,7 @@
 
   let ticking = false;
   const updateScrollMotion = () => {
+    revealVisibleNow();
     const maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
     progress.style.transform = `scaleX(${Math.min(1, scrollY / maxScroll)})`;
     topbar?.classList.toggle('is-scrolled', scrollY > 22);

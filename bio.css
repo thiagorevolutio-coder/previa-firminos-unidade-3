@@ -63,5 +63,6 @@
 @keyframes scene-drift-a{0%,100%{transform:translate3d(0,0,0) rotate(38deg)}50%{transform:translate3d(24px,-18px,0) rotate(47deg)}}
 @keyframes scene-drift-b{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-18px,20px,0) scale(1.08)}}
 @media(max-width:430px){.bio-js .bio-reveal{transform:translate3d(-18px,18px,0) scale(.99);filter:blur(3px)}.bio-js .bio-reveal.from-right{transform:translate3d(18px,18px,0) scale(.99)}}
+@media(max-width:560px){.bio-js .bio-reveal{filter:none;transition-duration:.5s,.58s,.01s!important}.bio-media>img{transform:scale(1.025);transition:none}.scene i,.orbit{animation:none!important}.bio-link{backdrop-filter:none}.bio-link:before{transition:transform .45s ease}.scroll-cue span{animation-duration:2.2s}}
 @media(prefers-reduced-motion:reduce){.bio-progress{display:none}.bio-js .bio-reveal{opacity:1;transform:none;filter:none}.bio-media>img{transform:none}.scene i,.orbit,.scroll-cue span{animation:none!important}}
 

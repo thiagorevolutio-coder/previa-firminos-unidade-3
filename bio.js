@@ -1,5 +1,6 @@
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const compactMotion = matchMedia('(max-width: 560px)').matches;
   const root = document.documentElement;
   const progress = document.createElement('span');
   progress.className = 'bio-progress';
@@ -40,7 +41,7 @@
   const updateMotion = () => {
     const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
     progress.style.transform = `scaleX(${Math.min(1, scrollY / max)})`;
-    const media = document.querySelector('.bio-media img');
+    const media = compactMotion ? null : document.querySelector('.bio-media img');
     const rect = document.querySelector('.bio-media')?.getBoundingClientRect();
     if (media && rect) {
       const offset = Math.max(-12, Math.min(12, (innerHeight * .5 - (rect.top + rect.height * .5)) * .025));
